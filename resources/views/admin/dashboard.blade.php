@@ -21,6 +21,11 @@
                 </div>
             </div>
         </div>
+
+        <div>
+            <a href="{{route('admin.projects.index')}}">Projects</a>
+        </div>
+
     </div>
 </div>
 @endsection
