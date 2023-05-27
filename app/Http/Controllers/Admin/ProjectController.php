@@ -71,9 +71,10 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $project)
+    public function edit($id)
     {
-        //
+        $project = Project::findOrFail($id);
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**
@@ -83,9 +84,13 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project)
+    public function update(Request $request, $id)
     {
-        //
+        $project = Project::findOrFail($id);
+        $data = $request->all();
+        $project->update($data);
+
+        return redirect()->route('admin.projects.index')->with('status', 'Modificato con successo');
     }
 
     /**

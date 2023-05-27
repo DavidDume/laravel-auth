@@ -21,6 +21,7 @@
             <td>{{$proj->link}}</td>
             <td>
                 <a type="button" class="btn btn-primary" href="{{route('admin.projects.show', ['project' => $proj->id])}}">Mostra</a>
+                <a type="button" class="btn btn-warning" href="{{route('admin.projects.edit', ['project' => $proj->id])}}">Modifica</a>
             </td>
         </tr>
 
