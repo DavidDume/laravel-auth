@@ -86,7 +86,14 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'title' => 'required|max:150',
+            'link' => 'required|max:100',
+            'description' => 'nullable|max:65535'
+        ]);
+
         $project = Project::findOrFail($id);
+
         $data = $request->all();
         $project->update($data);
 
