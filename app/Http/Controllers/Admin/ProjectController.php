@@ -26,7 +26,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.projects.create');
     }
 
     /**
@@ -37,7 +37,20 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'title' => 'required|max:150',
+            'link' => 'required|max:100',
+            'description' => 'nullable|max:65535'
+        ]);
+
+        $data = $request->all();
+
+        $newProject = new Project();
+        $newProject->fill($data);
+        $newProject->save();
+
+        return redirect()->route('admin.projects.show', ['project' => $newProject->id]);
     }
 
     /**
@@ -46,9 +59,10 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project)
+    public function show($id)
     {
-        //
+        $project = Project::findOrFail($id);
+        return view('admin.projects.show', compact('project'));
     }
 
     /**
